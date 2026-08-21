@@ -238,22 +238,20 @@ namespace Projeto_Menu_AMS
                 double[] valores = new double[2];
 
                 Console.Write("Digite dois valores separados por vírgula: ");
-
                 string entrada = Console.ReadLine();
-
                 string[] partes = entrada.Split(',');
 
                 if (partes.Length != 2 ||
-                    double.TryParse(partes[0].Trim(), out valores[0]) ||
-                    double.TryParse(partes[1].Trim(), out valores[1])
-                    )
-
-                    valores[0] = double.Parse(partes[0].Trim());
-                valores[1] = double.Parse(partes[1].Trim());
+                    !double.TryParse(partes[0].Trim(), out valores[0]) ||
+                    !double.TryParse(partes[1].Trim(), out valores[1]))
+                {
+                    Console.WriteLine("Entrada inválida!");
+                    Thread.Sleep(2000);
+                    continue;
+                }
 
                 double valor1 = valores[0];
                 double valor2 = valores[1];
-
 
                 if (valor1 > valor2)
                 {
@@ -363,32 +361,45 @@ namespace Projeto_Menu_AMS
         {
             do
             {
+                double[] valores = new double[2];
+
                 Console.Clear();
 
-                Console.SetCursorPosition(0, 0);
-                for (int i = 0; i < 80; i++)
+                janela(0, 39, 2, 62, 'd');
+                Console.SetCursorPosition(40, 1);
+
+                Console.WriteLine("*** OPERAÇÃO MÉDIA ***");
+
+                janela(3, 29, 13, 75, 's');
+                Console.SetCursorPosition(30, 4); Console.WriteLine("Digite dois valores separados por vírgula");
+
+                Console.SetCursorPosition(48, 6);
+                string entrada = Console.ReadLine();
+
+                string[] partes = entrada.Split(',');
+
+                if (partes.Length != 2 ||
+                    !double.TryParse(partes[0].Trim(), out valores[0]) ||
+                    !double.TryParse(partes[1].Trim(), out valores[1]))
                 {
-                    Console.Write("=");
-                    Thread.Sleep(1);
-                }
-                Console.SetCursorPosition(30, 1);
-                Console.WriteLine("OPERAÇÃO DE MÉDIA");
-                Console.SetCursorPosition(0, 2);
-                for (int i = 0; i < 80; i++)
-                {
-                    Console.Write("=");
-                    Thread.Sleep(1);
+                    Console.WriteLine("Valores inválidos!");
+                    Thread.Sleep(2000);
+                    continue;
                 }
 
+                double media = (valores[0] + valores[1]) / 2;
 
-            } while(Continuar());
+                Console.SetCursorPosition(30, 8); Console.Write($"A média entre os dois valores é {media:F2}");
+
+                Console.SetCursorPosition(30, 12);
+            } while (Continuar());
         }
 
         static void Jogo_Adivinha()
         {
 
         }
-        
+
         static void Opcao_Invalida()
         {
         }
@@ -415,10 +426,10 @@ namespace Projeto_Menu_AMS
 
             //Desenhando a janela
 
-            Console.SetCursorPosition(C1, L1);Console.Write(new string(lh, C2-C1));
+            Console.SetCursorPosition(C1, L1); Console.Write(new string(lh, C2 - C1));
             Console.SetCursorPosition(C1, L2); Console.Write(new string(lh, C2 - C1));
 
-            for (int i = L1; i <= L2; i++) 
+            for (int i = L1; i <= L2; i++)
             {
                 Console.SetCursorPosition(C1, i); Console.Write(lv);
                 Console.SetCursorPosition(C2, i); Console.Write(lv);
