@@ -87,37 +87,27 @@ namespace Projeto_Menu_AMS
                 // JANELA DAS OPÇÕES
                 // ====================================================
 
-                // Cria a janela que contém as opções do menu
-                // 's' = borda simples
-                // true = com sombra
                 janela(3, 29, 13, 70, 's', true);
 
 
-                // Exibe a opção 1
                 Console.SetCursorPosition(30, 4);
                 Console.WriteLine("[1] Menu dos Vetores");
 
-                // Exibe a opção 2
                 Console.SetCursorPosition(30, 5);
                 Console.WriteLine("[2] Tabuada");
 
-                // Exibe a opção 3
                 Console.SetCursorPosition(30, 6);
                 Console.WriteLine("[3] Compara Números");
 
-                // Exibe a opção 4
                 Console.SetCursorPosition(30, 7);
                 Console.WriteLine("[4] Equação do Segundo Grau");
 
-                // Exibe a opção 5
                 Console.SetCursorPosition(30, 8);
                 Console.WriteLine("[5] Média");
 
-                // Exibe a opção 6
                 Console.SetCursorPosition(30, 9);
                 Console.WriteLine("[6] Jogo Adivinha");
 
-                // Exibe a opção 7
                 Console.SetCursorPosition(30, 10);
                 Console.WriteLine("[7] Encerrar");
 
@@ -126,27 +116,17 @@ namespace Projeto_Menu_AMS
                 // LINHA DE SEPARAÇÃO
                 // ====================================================
 
-                // Posiciona o cursor
                 Console.SetCursorPosition(30, 11);
 
-                // Cria uma linha formada por 40 caracteres '='
                 for (int i = 0; i < 40; i++)
                 {
                     Console.Write("=");
                 }
 
-
-                // ====================================================
-                // LEITURA DA OPÇÃO
-                // ====================================================
-
-                // Posiciona o cursor para solicitar a opção
                 Console.SetCursorPosition(30, 12);
 
-                // Solicita a opção escolhida
                 Console.Write("Digite sua Opção: ");
 
-                // Lê a opção e converte para inteiro
                 int opcao = int.Parse(Console.ReadLine());
 
 
@@ -154,11 +134,8 @@ namespace Projeto_Menu_AMS
                 // JANELA DE MENSAGEM
                 // ====================================================
 
-                // Cria uma janela onde será mostrada a mensagem
-                // correspondente à opção escolhida.
                 janela(15, 29, 19, 70, 's', true);
 
-                // Posiciona o cursor dentro da janela
                 Console.SetCursorPosition(32, 17);
 
 
@@ -166,7 +143,6 @@ namespace Projeto_Menu_AMS
                 // DECISÃO DA OPÇÃO
                 // ====================================================
 
-                // O switch verifica qual opção o usuário escolheu.
                 switch (opcao)
                 {
                     // ------------------------------------------------
@@ -174,22 +150,14 @@ namespace Projeto_Menu_AMS
                     // ------------------------------------------------
 
                     case 1:
-
-                        // Mensagem antes de abrir o menu
                         Console.WriteLine("Abrindo Menu dos Vetores...");
 
-                        // Aguarda 1,5 segundos
                         Thread.Sleep(1500);
 
-                        // Chama o método do Menu dos Vetores
                         Menu_Vetores();
 
                         break;
 
-
-                    // ------------------------------------------------
-                    // OPÇÃO 2 - TABUADA
-                    // ------------------------------------------------
 
                     case 2:
 
@@ -197,15 +165,10 @@ namespace Projeto_Menu_AMS
 
                         Thread.Sleep(1500);
 
-                        // Chama o método da Tabuada
                         Tabuada();
 
                         break;
 
-
-                    // ------------------------------------------------
-                    // OPÇÃO 3 - COMPARAÇÃO DE NÚMEROS
-                    // ------------------------------------------------
 
                     case 3:
 
@@ -213,15 +176,9 @@ namespace Projeto_Menu_AMS
 
                         Thread.Sleep(1500);
 
-                        // Chama o método de comparação
                         Compara_Numeros();
 
                         break;
-
-
-                    // ------------------------------------------------
-                    // OPÇÃO 4 - BHASKARA
-                    // ------------------------------------------------
 
                     case 4:
 
@@ -229,15 +186,10 @@ namespace Projeto_Menu_AMS
 
                         Thread.Sleep(1500);
 
-                        // Chama o método de Bhaskara
                         Bhaskara();
 
                         break;
 
-
-                    // ------------------------------------------------
-                    // OPÇÃO 5 - MÉDIA
-                    // ------------------------------------------------
 
                     case 5:
 
@@ -245,15 +197,9 @@ namespace Projeto_Menu_AMS
 
                         Thread.Sleep(1500);
 
-                        // Chama o método da média
                         Media();
 
                         break;
-
-
-                    // ------------------------------------------------
-                    // OPÇÃO 6 - JOGO DE ADIVINHAÇÃO
-                    // ------------------------------------------------
 
                     case 6:
 
@@ -261,15 +207,9 @@ namespace Projeto_Menu_AMS
 
                         Thread.Sleep(1500);
 
-                        // Chama o método do jogo
                         Jogo_Adivinha();
 
                         break;
-
-
-                    // ------------------------------------------------
-                    // OPÇÃO 7 - ENCERRAR
-                    // ------------------------------------------------
 
                     case 7:
 
@@ -277,10 +217,8 @@ namespace Projeto_Menu_AMS
 
                         Thread.Sleep(1500);
 
-                        // Posiciona o cursor
                         Console.SetCursorPosition(32, 19);
 
-                        // Encerra completamente o programa
                         Environment.Exit(0);
 
                         break;
@@ -296,14 +234,11 @@ namespace Projeto_Menu_AMS
 
                         Thread.Sleep(1500);
 
-                        // Chama o método de opção inválida
                         Opcao_Invalida();
 
                         break;
                 }
 
-                // O Menu Principal continua sendo executado
-                // enquanto a condição for verdadeira.
             } while (true);
         }
 
@@ -314,24 +249,14 @@ namespace Projeto_Menu_AMS
 
         static void Menu_Vetores()
         {
-            // Mantém o menu funcionando continuamente
             do
             {
-                // Limpa a tela
                 Console.Clear();
 
-
-                // ====================================================
-                // TÍTULO
-                // ====================================================
-
-                // Cria a janela do título
                 janela(0, 39, 2, 65, 'd', false);
 
-                // Posiciona o cursor dentro da janela
                 Console.SetCursorPosition(40, 1);
 
-                // Exibe o título
                 Console.Write("*** Menu dos Vetores ***");
 
 
@@ -339,28 +264,22 @@ namespace Projeto_Menu_AMS
                 // JANELA DAS OPÇÕES
                 // ====================================================
 
-                // Cria a janela que contém as opções
                 janela(3, 35, 12, 70, 's', true);
 
 
-                // Opção 1
                 Console.SetCursorPosition(36, 4);
                 Console.WriteLine("[1] Sorteio de Nomes");
 
-                // Opção 2
                 Console.SetCursorPosition(36, 5);
                 Console.WriteLine("[2] Sorteio de Duplas");
 
-                // Opção 3
                 Console.SetCursorPosition(36, 6);
                 Console.WriteLine("[3] Valores por Extenso");
 
-                // Opção 4
                 Console.SetCursorPosition(36, 7);
                 Console.WriteLine("[4] Voltar ao Principal");
 
 
-                // Linha de separação
                 Console.SetCursorPosition(36, 9);
                 Console.WriteLine(new string('=', 34));
 
@@ -372,7 +291,6 @@ namespace Projeto_Menu_AMS
                 Console.SetCursorPosition(36, 11);
                 Console.Write("Digite sua Opção: ");
 
-                // Lê a opção escolhida
                 int opcao = int.Parse(Console.ReadLine());
 
 
@@ -391,61 +309,49 @@ namespace Projeto_Menu_AMS
 
                 switch (opcao)
                 {
-                    // Opção 1
                     case 1:
 
                         Console.Write("Abrindo Sorteio de Nomes");
 
                         Thread.Sleep(1500);
 
-                        // Chama o método correspondente
                         Sorteio_Nomes();
 
                         break;
 
 
-                    // Opção 2
                     case 2:
 
                         Console.Write("Abrindo Sorteio de Duplas");
 
                         Thread.Sleep(1500);
 
-                        // Chama o método correspondente
                         Sorteio_Duplas();
 
                         break;
 
 
-                    // Opção 3
                     case 3:
 
                         Console.Write("Abrindo Valores por Extenso");
 
                         Thread.Sleep(1500);
 
-                        // Chama o método correspondente
                         Valores_Extenso();
 
                         break;
 
 
-                    // Opção 4
                     case 4:
 
                         Console.Write("Abrindo Menu Principal");
 
                         Thread.Sleep(1500);
-
-                        // return encerra o método Menu_Vetores
-                        // e retorna para quem chamou esse método.
                         return;
 
 
-                    // Qualquer outro valor
                     default:
 
-                        // Chama o método de opção inválida
                         Opcao_Invalida();
 
                         break;
@@ -461,16 +367,9 @@ namespace Projeto_Menu_AMS
 
         static void Tabuada()
         {
-            // Mantém a operação sendo repetida enquanto Continuar()
-            // retornar true.
             do
             {
                 Console.Clear();
-
-
-                // ====================================================
-                // TÍTULO
-                // ====================================================
 
                 janela(0, 39, 2, 65, 'd', false);
 
@@ -513,26 +412,17 @@ namespace Projeto_Menu_AMS
                 // CÁLCULO E EXIBIÇÃO DA TABUADA
                 // ====================================================
 
-                // Percorre os valores de 0 até 10
                 for (int i = 0; i <= 10; i++)
                 {
-                    // Define a posição de cada operação
                     Console.SetCursorPosition(45, 6 + i);
 
-                    // Mostra a operação
                     Console.WriteLine($"{tab} x {i} = {tab * i}");
 
-                    // Pula uma linha
                     Console.WriteLine();
                 }
 
-
-                // Posiciona o cursor antes de perguntar se deseja
-                // continuar.
                 Console.SetCursorPosition(30, 19);
 
-
-                // Pergunta ao usuário se deseja continuar.
             } while (Continuar());
         }
 
