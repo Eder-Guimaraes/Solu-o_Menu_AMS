@@ -534,37 +534,35 @@ namespace Projeto_Menu_AMS
             {
                 Console.Clear();
 
-
-                janela(0, 39, 2, 65, 'd', false);
+                janela(0, 38, 2, 66, 'd', false);
 
                 Console.SetCursorPosition(44, 1);
+                Console.Write("OPERAÇÃO BHASKARA");
 
-                Console.WriteLine("OPERAÇÃO BHASKARA");
+                janela(3, 15, 12, 95, 's', true);
 
+                Console.SetCursorPosition(18, 5);
+                Console.Write("Digite os valores de A, B e C separados por espaço:");
+
+                Console.SetCursorPosition(18, 7);
 
                 double[] valores = new double[3];
-
-
-                Console.SetCursorPosition(5, 3);
-
-                Console.Write("Digite, respectivamente, os valores de A, B e C separados por espaço: ");
-
-                Console.SetCursorPosition(5, 5);
 
                 string entrada = Console.ReadLine();
 
                 string[] partes = entrada.Split(' ');
 
                 if (partes.Length != 3 ||
-                    !double.TryParse(partes[0].Trim(), out valores[0]) ||
-                    !double.TryParse(partes[1].Trim(), out valores[1]) ||
-                    !double.TryParse(partes[2].Trim(), out valores[2])
-                    )
+                    !double.TryParse(partes[0], out valores[0]) ||
+                    !double.TryParse(partes[1], out valores[1]) ||
+                    !double.TryParse(partes[2], out valores[2]))
                 {
-                    Console.WriteLine("Valores inválidos!");
+                    janela(14, 25, 18, 85, 'd', false);
+
+                    Console.SetCursorPosition(35, 16);
+                    Console.Write("Digite exatamente três números válidos.");
 
                     Thread.Sleep(2000);
-
                     continue;
                 }
 
@@ -572,60 +570,50 @@ namespace Projeto_Menu_AMS
                 double B = valores[1];
                 double C = valores[2];
 
-                // Em uma equação do segundo grau, A não pode ser zero.
                 if (A == 0)
                 {
-                    Console.WriteLine("O valor de A não pode ser zero!");
+                    janela(14, 25, 18, 85, 'd', false);
+
+                    Console.SetCursorPosition(33, 16);
+                    Console.Write("O coeficiente A deve ser diferente de zero.");
 
                     Thread.Sleep(2000);
-
                     continue;
                 }
 
+                double delta = Math.Pow(B, 2) - (4 * A * C);
 
-                Console.SetCursorPosition(5, 5);
+                janela(14, 20, 21, 90, 'd', false);
 
-
-                // ====================================================
-                // CÁLCULO DO DELTA
-                // ====================================================
-
-                // Fórmula:
-                // Δ = B² - 4AC
-                double delta = (Math.Pow(B, 2)) - (4 * A * C);
-
-
-                // Exibe o delta
-                Console.WriteLine($"Seu delta é igual a: {delta}");
-
-
-                // ====================================================
-                // VERIFICAÇÃO DO DELTA
-                // ====================================================
-
-                Console.SetCursorPosition(5, 7);
+                Console.SetCursorPosition(24, 15);
+                Console.Write($"Delta = {delta:F2}");
 
                 if (delta < 0)
                 {
-                    Console.WriteLine("Não existem raízes reais se delta é menor do que 0");
+                    Console.SetCursorPosition(24, 17);
+                    Console.Write("A equação não possui raízes reais.");
+                }
+                else if (delta == 0)
+                {
+                    double raiz = (-B) / (2 * A);
+
+                    Console.SetCursorPosition(24, 17);
+                    Console.Write($"Raiz única = {raiz:F2}");
                 }
                 else
                 {
                     double raiz1 = (-B + Math.Sqrt(delta)) / (2 * A);
-
                     double raiz2 = (-B - Math.Sqrt(delta)) / (2 * A);
 
+                    Console.SetCursorPosition(24, 17);
+                    Console.Write($"Raiz 1 = {raiz1:F2}");
 
-                    if (delta == 0)
-                    {
-                        Console.WriteLine($"Existe uma raiz: {raiz1:F2}");
-                    }
-
-                    else
-                    {
-                        Console.WriteLine($"Existem duas raízes: {raiz1:F2} e {raiz2:F2}");
-                    }
+                    Console.SetCursorPosition(24, 18);
+                    Console.Write($"Raiz 2 = {raiz2:F2}");
                 }
+
+                Console.SetCursorPosition(24, 20);
+
             } while (Continuar());
         }
 
@@ -694,24 +682,109 @@ namespace Projeto_Menu_AMS
         // JOGO DE ADIVINHAÇÃO
         // ============================================================
 
+        // ============================================================
+        // JOGO DE ADIVINHAÇÃO
+        // ============================================================
+
         static void Jogo_Adivinha()
         {
             do
             {
-                janela(0, 39, 2, 65, 'd', false);
+                Console.Clear();
 
-                Console.SetCursorPosition(44, 1);
+                janela(0, 36, 2, 68, 'd', false);
 
-                Console.WriteLine("OPERAÇÃO ADIVINHA");
+                Console.SetCursorPosition(42, 1);
+                Console.Write("JOGO DE ADIVINHAÇÃO");
 
+                janela(3, 20, 20, 90, 's', true);
 
-                // Pergunta se deseja continuar.
+                Random sorteio = new Random();
+
+                int numero = sorteio.Next(1, 101);
+
+                int tentativa = 0;
+                int chute = 0;
+
+                Console.SetCursorPosition(24, 5);
+                Console.WriteLine("Tente adivinhar o número entre 1 e 100.");
+
+                while (chute != numero)
+                {
+                    tentativa++;
+
+                    Console.SetCursorPosition(24, 7);
+                    Console.Write(new string(' ', 45));
+
+                    Console.SetCursorPosition(24, 7);
+                    Console.Write($"Tentativa {tentativa}: ");
+
+                    if (!int.TryParse(Console.ReadLine(), out chute))
+                    {
+                        Console.SetCursorPosition(24, 9);
+                        Console.Write(new string(' ', 50));
+
+                        Console.SetCursorPosition(24, 9);
+                        Console.Write("Digite um número válido!");
+
+                        continue;
+                    }
+
+                    if (chute < 1 || chute > 100)
+                    {
+                        Console.SetCursorPosition(24, 9);
+                        Console.Write(new string(' ', 50));
+
+                        Console.SetCursorPosition(24, 9);
+                        Console.Write("Digite um número entre 1 e 100.");
+
+                        continue;
+                    }
+
+                    if (chute < numero)
+                    {
+                        Console.SetCursorPosition(24, 9);
+                        Console.Write(new string(' ', 50));
+
+                        Console.SetCursorPosition(24, 9);
+                        Console.Write("O número secreto é MAIOR.");
+                    }
+                    else if (chute > numero)
+                    {
+                        Console.SetCursorPosition(24, 9);
+                        Console.Write(new string(' ', 50));
+
+                        Console.SetCursorPosition(24, 9);
+                        Console.Write("O número secreto é MENOR.");
+                    }
+                }
+
+                janela(12, 25, 17, 85, 'd', false);
+
+                Console.SetCursorPosition(30, 14);
+                Console.Write($"Parabéns! Você acertou o número {numero}.");
+
+                Console.SetCursorPosition(30, 15);
+                Console.Write($"Quantidade de tentativas: {tentativa}");
+
+                Console.SetCursorPosition(25, 19);
+
             } while (Continuar());
         }
 
         static void Opcao_Invalida()
         {
-            // Método reservado para tratar uma opção inválida.
+            Console.Clear();
+
+            janela(6, 28, 12, 72, 'd', true);
+
+            Console.SetCursorPosition(36, 8);
+            Console.Write("Opção inválida!");
+
+            Console.SetCursorPosition(31, 10);
+            Console.Write("Pressione qualquer tecla para voltar...");
+
+            Console.ReadKey();
         }
 
 
@@ -917,21 +990,68 @@ namespace Projeto_Menu_AMS
             }
         }
 
-
         // ============================================================
         // SORTEIO DE NOMES
         // ============================================================
 
         static void Sorteio_Nomes()
         {
-            Console.Clear();
+            do
+            {
+                Console.Clear();
 
-            // Exibe o título
-            Console.WriteLine("Sorteio de Nomes");
+                janela(0, 35, 2, 70, 'd', false);
 
-            // Implementação do sorteio de nomes
+                Console.SetCursorPosition(43, 1);
+                Console.Write("SORTEIO DE NOMES");
+
+                janela(3, 20, 22, 85, 's', true);
+
+                Console.SetCursorPosition(24, 5);
+                Console.Write("Quantos nomes deseja cadastrar (2 a 10): ");
+
+                int quantidade;
+
+                if (!int.TryParse(Console.ReadLine(), out quantidade))
+                {
+                    Console.SetCursorPosition(24, 7);
+                    Console.Write("Valor inválido!");
+
+                    Thread.Sleep(2000);
+                    continue;
+                }
+
+                if (quantidade < 2 || quantidade > 10)
+                {
+                    Console.SetCursorPosition(24, 7);
+                    Console.Write("Informe um número entre 2 e 10.");
+
+                    Thread.Sleep(2000);
+                    continue;
+                }
+
+                string[] nomes = new string[quantidade];
+
+                for (int i = 0; i < quantidade; i++)
+                {
+                    Console.SetCursorPosition(24, 7 + i);
+                    Console.Write($"Nome {i + 1}: ");
+                    nomes[i] = Console.ReadLine();
+                }
+
+                Random sorteio = new Random();
+
+                int escolhido = sorteio.Next(0, quantidade);
+
+                janela(15, 30, 19, 75, 'd', false);
+
+                Console.SetCursorPosition(34, 17);
+                Console.Write($"Nome sorteado: {nomes[escolhido]}");
+
+                Console.SetCursorPosition(30, 21);
+
+            } while (Continuar());
         }
-
 
         // ============================================================
         // SORTEIO DE DUPLAS
@@ -939,12 +1059,84 @@ namespace Projeto_Menu_AMS
 
         static void Sorteio_Duplas()
         {
-            Console.Clear();
+            do
+            {
+                Console.Clear();
 
-            // Exibe o título
-            Console.WriteLine("Sorteio de Duplas");
+                janela(0, 35, 2, 70, 'd', false);
 
-            // Implementação do sorteio de duplas
+                Console.SetCursorPosition(42, 1);
+                Console.Write("SORTEIO DE DUPLAS");
+
+                janela(3, 20, 24, 90, 's', true);
+
+                Console.SetCursorPosition(24, 5);
+                Console.Write("Quantidade de alunos (par e entre 2 e 20): ");
+
+                int quantidade;
+
+                if (!int.TryParse(Console.ReadLine(), out quantidade))
+                {
+                    Console.SetCursorPosition(24, 7);
+                    Console.Write("Valor inválido!");
+
+                    Thread.Sleep(2000);
+                    continue;
+                }
+
+                if (quantidade < 2 || quantidade > 20 || quantidade % 2 != 0)
+                {
+                    Console.SetCursorPosition(24, 7);
+                    Console.Write("A quantidade deve ser PAR e entre 2 e 20.");
+
+                    Thread.Sleep(2000);
+                    continue;
+                }
+
+                string[] alunos = new string[quantidade];
+
+                for (int i = 0; i < quantidade; i++)
+                {
+                    Console.SetCursorPosition(24, 7 + i);
+                    Console.Write($"Aluno {i + 1}: ");
+                    alunos[i] = Console.ReadLine();
+                }
+
+                // Embaralhamento (Fisher-Yates)
+
+                Random random = new Random();
+
+                for (int i = quantidade - 1; i > 0; i--)
+                {
+                    int j = random.Next(i + 1);
+
+                    string aux = alunos[i];
+                    alunos[i] = alunos[j];
+                    alunos[j] = aux;
+                }
+
+                Console.Clear();
+
+                janela(0, 35, 2, 70, 'd', false);
+
+                Console.SetCursorPosition(42, 1);
+                Console.Write("DUPLAS SORTEADAS");
+
+                janela(3, 20, 22, 90, 's', true);
+
+                int linha = 5;
+
+                for (int i = 0; i < quantidade; i += 2)
+                {
+                    Console.SetCursorPosition(25, linha);
+                    Console.Write($"Dupla {(i / 2) + 1}: {alunos[i]}  e  {alunos[i + 1]}");
+
+                    linha++;
+                }
+
+                Console.SetCursorPosition(25, 20);
+
+            } while (Continuar());
         }
 
 
@@ -954,12 +1146,129 @@ namespace Projeto_Menu_AMS
 
         static void Valores_Extenso()
         {
-            Console.Clear();
+            do
+            {
+                Console.Clear();
 
-            // Exibe o título
-            Console.WriteLine("Valores por Extenso");
+                janela(0, 35, 2, 72, 'd', false);
 
-            // Implementação dos valores por extenso
+                Console.SetCursorPosition(42, 1);
+                Console.Write("VALORES POR EXTENSO");
+
+                janela(3, 15, 20, 95, 's', true);
+
+                string[] unidades =
+                {
+            "", "Um", "Dois", "Três", "Quatro",
+            "Cinco", "Seis", "Sete", "Oito", "Nove"
+        };
+
+                string[] especiais =
+                {
+            "Dez", "Onze", "Doze", "Treze", "Quatorze",
+            "Quinze", "Dezesseis", "Dezessete",
+            "Dezoito", "Dezenove"
+        };
+
+                string[] dezenas =
+                {
+            "", "", "Vinte", "Trinta", "Quarenta",
+            "Cinquenta", "Sessenta", "Setenta",
+            "Oitenta", "Noventa"
+        };
+
+                string[] centenas =
+                {
+            "", "Cento", "Duzentos", "Trezentos",
+            "Quatrocentos", "Quinhentos",
+            "Seiscentos", "Setecentos",
+            "Oitocentos", "Novecentos"
+        };
+
+                Console.SetCursorPosition(20, 5);
+                Console.Write("Digite um número entre 0 e 1000: ");
+
+                int numero;
+
+                // Verifica se foi digitado um número
+                if (!int.TryParse(Console.ReadLine(), out numero))
+                {
+                    Console.SetCursorPosition(20, 7);
+                    Console.Write("Digite um número válido!");
+
+                    Thread.Sleep(2000);
+                    continue;
+                }
+
+                // Verifica se está na faixa permitida
+                if (numero < 0 || numero > 1000)
+                {
+                    Console.SetCursorPosition(20, 7);
+                    Console.Write("O número deve estar entre 0 e 1000.");
+
+                    Thread.Sleep(2000);
+                    continue;
+                }
+
+                string extenso = "";
+
+                if (numero == 0)
+                {
+                    extenso = "Zero";
+                }
+                else if (numero == 1000)
+                {
+                    extenso = "Mil";
+                }
+                else if (numero == 100)
+                {
+                    extenso = "Cem";
+                }
+                else
+                {
+                    int c = numero / 100;
+                    int resto = numero % 100;
+
+                    if (c > 0)
+                    {
+                        extenso += centenas[c];
+
+                        if (resto > 0)
+                            extenso += " e ";
+                    }
+
+                    if (resto >= 10 && resto <= 19)
+                    {
+                        extenso += especiais[resto - 10];
+                    }
+                    else
+                    {
+                        int d = resto / 10;
+                        int u = resto % 10;
+
+                        if (d > 1)
+                        {
+                            extenso += dezenas[d];
+
+                            if (u > 0)
+                                extenso += " e ";
+                        }
+
+                        if (u > 0)
+                        {
+                            extenso += unidades[u];
+                        }
+                    }
+                }
+
+                janela(12, 20, 16, 90, 'd', false);
+
+                Console.SetCursorPosition(24, 14);
+                Console.Write($"Número por extenso: {extenso}");
+
+                Console.SetCursorPosition(20, 18);
+
+            } while (Continuar());
         }
     }
 }
